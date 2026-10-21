@@ -10,8 +10,9 @@
     
     $Template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastImageAndText02)
     
-    # Combine the script's current folder path with your image file name
-    $FullPath = Join-Path $PSScriptRoot $ImageFileName
+# Ensure it falls back to the current directory if $PSScriptRoot is empty
+    $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
+    $FullPath = Join-Path $ScriptDir $ImageFileName
 
     # Set the Image path node
     $ImageNode = $Template.GetElementsByTagName('image').Item(0)
