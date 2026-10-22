@@ -9,7 +9,7 @@ function Show-Notification {
     [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
     
     # 1. Change the template type to ToastImageAndText04 (Supports a large hero image banner)
-    $Template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastImageAndText04)
+    $Template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastImageAndText01)
 
     $TargetFolder = '$env:USERPROFILE\Hehe'
     
