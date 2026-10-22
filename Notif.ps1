@@ -1,4 +1,4 @@
-﻿function Show-Notification {
+function Show-Notification {
     [cmdletbinding()]
     Param (
         [string]$ToastTitle,
@@ -8,11 +8,12 @@
 
     [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
     
-    $Template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastImageAndText02)
+    # 1. Change the template type to ToastImageAndText04 (Supports a large hero image banner)
+    $Template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastImageAndText04)
 
     $TargetFolder = '$env:USERPROFILE\Hehe'
     
-# Ensure it falls back to the current directory if $PSScriptRoot is empty
+    # Ensure it falls back to the current directory if $PSScriptRoot is empty
     $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
     $FullPath = Join-Path $ScriptDir $ImageFileName
 
@@ -33,6 +34,5 @@
     $Notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId)
     $Notifier.Show($Toast)
 }
-
 
 Show-Notification -ToastTitle "Your device's security is comprimised" -ToastText "Access to this PC has been blocked" -ImageFileName "Notif.png"
